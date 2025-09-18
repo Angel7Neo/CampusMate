@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CampusMate | Contact Us</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        overflow-x: hidden; 
+        background-color: #f1f1f1;
+      }
+
+      .emergency-banner {
+        background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+        color: white;
+        text-align: center;
+        padding: 15px;
+        margin: 50px auto 0;
+        max-width: 800px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+      }
+
+      /* HEADER */
+      .header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        background: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .main-heading {
+        margin: 0;
+        line-height: 1;
+        text-align: center;
+      }
+
+      .campus {
+        display: block;
+        color: #3b77cc;
+        font-family: "Bangers", cursive;
+        font-size: 40px;
+      }
+
+      .mate {
+        display: block;
+        color: #f9b13c;
+        font-family: "Anton", sans-serif;
+        font-size: 30px;
+      }
+
+      .mate::after {
+        content: "";
+        display: block;
+        width: 100px;
+        height: 6px;
+        background: #1d1d1d;
+        margin: 4px auto 0;
+        border-radius: 3px;
+      }
+
+      .top-links a {
+        margin-left: 15px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #222831;
+      }
+
+      .top-links a:hover {
+        color: #fdb44b;
+      }
+
+      /* Pop-up heading style */
+      .popup-heading {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%) translateY(-20px);
+        top: 50%;
+        color: #00796b;
+        font-size: 28px;
+        opacity: 0;
+        transition: all 1s ease-out;
+        pointer-events: none; 
+      }
+
+      .popup-heading.active {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      /* Page Content */
+      .container {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 30px;
+        max-width: 1200px;
+        margin: auto;
+      }
+
+      /* Left section (grey box) */
+      .form-section {
+        background: #f7f9fa;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        width: 50%;
+      }
+
+      /* Right section (plain) */
+      .info-section {
+        width: 45%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+
+      h2 {
+        margin-top: 0;
+        color: #004d40;
+      }
+
+      /* Form rows */
+      .form-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .form-row label {
+        width: 120px;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .form-row input,
+      .form-row textarea,
+      .form-row select {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      form button {
+        background-color: #00796b;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      form button:hover {
+        background-color: #004d40;
+      }
+
+      /* Success Message */
+      #formMessage {
+        margin-top: 10px;
+        color: green;
+        display: none;
+        font-weight: bold;
+      }
+
+      /* Right info text */
+      .info-box {
+        margin-bottom: 20px;
+      }
+
+      .info-box h3 {
+        color: #00796b;
+      }
+
+      /* Book button */
+      .book-btn {
+        display: inline-block;
+        margin-top: 10px;
+        background-color: #00796b;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+
+      .book-btn:hover {
+        background-color: #004d40;
+      }
+
+      /* Image under info */
+      .info-section img {
+        margin-top: 20px;
+        border-radius: 8px;
+        width: 75%;
+        height: auto;
+      }
+
+      /* Footer */
+      footer {
+        background: #1c1c1c;
+        color: #fff;
+        padding: 30px 60px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-top: 40px;
+      }
+
+      footer h4 {
+        color: #f5a623;
+      }
+
+      footer a {
+        color: #fff;
+        text-decoration: none;
+        display: block;
+        margin: 5px 0;
+      }
+
+      footer a:hover {
+        color: #f5a623;
+      }
+
+      .copyright {
+        text-align: center;
+        background: #111;
+        padding: 10px;
+        font-size: 14px;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+          align-items: center;
+        }
+        .form-section,
+        .info-section {
+          width: 100%;
+        }
+        .info-section img {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Emergency Banner -->
+    
+    <!-- HEADER -->
+    <div class="header">
+      <h1 class="main-heading">
+        <span class="campus">CAMPUS</span><span class="mate">MATE</span>
+      </h1>
+
+      <div class="top-links">
+        <a href="welcome.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="faqs.html">FAQs</a>
+      </div>
+
+      <!-- Centered Pop-up Heading -->
+      <h2 class="popup-heading">Contact Us</h2>
+    </div>
+
+    <!-- CONTACT PAGE CONTENT -->
+    <div class="container">
+      <div class="form-section">
+        <h2>General Queries</h2>
+        <p>
+          Have a question or need help? Don’t hesitate to reach out by filling
+          in the form below. We’ll get back to you soon.
+
+        </p>
+        <form id="contactForm">
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input type="text" id="name" required />
+          </div>
+          <div class="form-row">
+            <label for="surname">Surname</label>
+            <input type="text" id="surname" required />
+          </div>
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" required />
+          </div>
+          <div class="form-row">
+            <label for="contact">Contact</label>
+            <input
+              type="tel"
+              id="contact"
+              placeholder="+27 000 0000"
+              required
+            />
+          </div>
+          <div class="form-row">
+            <label for="enquiry">Enquiry</label>
+            <select id="enquiry" required>
+              <option value="">Select an option</option>
+              <option value="general">Book Clinical Appointment</option>
+              <option value="technical">Book Counselling Appointment</option>
+              <option value="counselling">
+                Appointment Status / Reschedule
+              </option>
+              <option value="clinic">General queries/FAQS</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-row" style="align-items: flex-start">
+            <label for="message">Message</label>
+            <textarea id="message" rows="4"></textarea>
+          </div>
+          <button type="submit">Send message</button>
+          <p id="formMessage">✅ Your message has been sent successfully!</p>
+        </form>
+      </div>
+
+      <div class="info-section">
+        <h2>Availability</h2>
+        <div class="info-box">
+          <h3>Operating Hours</h3>
+          <br />
+          <p>Monday - Friday: 8:30 am - 5pm</p>
+          <br />
+          <p>Saturdays: 8am - 2pm</p>
+          <br />
+          <p>Public Holidays: Closed</p>
+          <br />
+          <p>Need our services? Book now:</p>
+          <br />
+          <a href="bookingPage.html" class="book-btn">Book an Appointment</a>
+        </div>
+
+        <h2>Important notice!</h2>
+        <p>This system is designed for registered CPUT students only.</p>
+
+        <img src="ContactUs image.jpg" alt="Description of image" />
+      </div>
+    </div>
+
+    <div class="emergency-banner">
+        <p><i class="fas fa-exclamation-triangle"></i> <strong>Emergency?</strong> Call campus security at <a href="tel:+27123456789">+27 123 456 789</a> </p>
+      </div>
+   
+    <footer>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="welcome.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="studentProfile.html">Appointments</a>
+        <a href="faqs.html">FAQs</a>
+      </div>
+      <div>
+        <h4>Health Resources</h4>
+        <a href="#">Mental Health</a>
+        <a href="#">Sexual Health</a>
+        <a href="#">Nutrition Advice</a>
+        <a href="#">Wellness Tips</a>
+      </div>
+      <div>
+        <h4>Contact Us</h4>
+        <p>Campus Health Center, Building A</p>
+        <p>(012) 345-6789</p>
+        <p>health@campus.edu</p>
+        <p>Mon-Fri: 8AM-5PM</p>
+      </div>
+    </footer>
+    <div class="copyright">
+      © 2025 CampusMate Health Services. All rights reserved.
+    </div>
+
+    <script>
+      // Popup heading animation
+      window.addEventListener("load", () => {
+        const popupHeading = document.querySelector(".popup-heading");
+        popupHeading.classList.add("active");
+      });
+
+      // Contact form success message
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          document.getElementById("formMessage").style.display = "block";
+          this.reset();
+        });
+    </script>
+  </body>
+</html>
+

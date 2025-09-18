@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CampusMate | FAQs</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: #f7f9fa;
+        color: #222831;
+        overflow-x: hidden; /* ✅ Fix horizontal scroll */
+      }
+
+      .header {
+       display: flex;
+       justify-content: space-between;
+        align-items: center;
+        padding: 15px 40px;  /* more horizontal padding */
+        background-color: #ffffff;
+        box-sizing: border-box;
+       width: 100%;
+      }
+
+      .top-links {
+        display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      max-width: 100%;   /* prevent overflow */
+      overflow: hidden;  /* hides any accidental spill */
+      }
+
+      .main-heading {
+        font-size: 20px;
+        margin: 0;
+        text-align: center;
+        line-height: 1;
+      }
+
+      .main-heading .campus {
+        display: block;
+        color: #3b77cc;
+        font-family: "Bangers", cursive;
+        font-size: 40px;
+      }
+
+      .main-heading .mate {
+        display: block;
+        color: #f9b13c;
+        font-family: "Anton", sans-serif;
+        font-size: 30px;
+        line-height: 1;
+      }
+
+      .main-heading .mate::after {
+        content: "";
+        display: block;
+        width: 100px;
+        height: 6px;
+        background: #1d1d1d;
+        margin: 4px auto 0;
+        border-radius: 3px;
+      }
+
+
+      .top-links a {
+        text-decoration: none;
+        color: #222831;
+        font-weight: bold;
+      }
+
+      .top-links a:hover {
+        color: #fdb44b;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 30px auto;
+        padding: 20px;
+        box-sizing: border-box; /* ✅ Ensure padding doesn’t add overflow */
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #00796b;
+      }
+
+      details {
+        background: white;
+        margin-bottom: 15px;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        cursor: pointer;
+      }
+
+      details summary {
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      details p {
+        margin-top: 10px;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 15px;
+        background-color: #222831;
+        color: white;
+        font-size: 14px;
+        width: 100%;
+        box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.08);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <div class="header">
+      <h1 class="main-heading">
+        <span class="campus">CAMPUS</span><span class="mate">MATE</span>
+      </h1>
+      <div class="top-links">
+        <a href="welcome.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contactUs.html">Contact</a>
+        
+      </div>
+    </div>
+
+    <!-- FAQ CONTENT -->
+    <div class="container">
+      <h2>Frequently Asked Questions (FAQs)</h2>
+
+      <details>
+        <summary>Who can use CampusMate services?</summary>
+        <p>
+          CampusMate is exclusively for registered <strong>CPUT students</strong>.
+          You’ll need your student number to sign up, log in, and book
+          appointments.
+        </p>
+      </details>
+
+      <details>
+        <summary>How do I book an appointment?</summary>
+        <p>
+          To book: <br />
+          1️⃣ Sign up with your student number and email. <br />
+          2️⃣ Log in using your credentials. <br />
+          3️⃣ Go to the <a href="bookingPage.html">Booking Page</a> and choose
+          your service, date, and time. <br />
+          4️⃣ Confirm your booking and view it in your student profile.
+        </p>
+      </details>
+
+      <details>
+        <summary>Do I need to sign up before booking?</summary>
+        <p>
+          Yes. Every student must <strong>sign up first</strong> before they can
+          log in and book appointments. This ensures only CPUT students access
+          the system.
+        </p>
+      </details>
+
+      <details>
+        <summary>What services can I book?</summary>
+        <p>
+          Students can book services such as: <br />
+          - General medical consultations <br />
+          - Minor ailments (colds, flu, etc.) <br />
+          - Reproductive health support <br />
+          - HIV counselling and testing <br />
+          - Treatment for STIs and more. <br />
+          See the full list on the
+          <a href="bookingPage.html">Booking Page</a>.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can I reschedule or cancel my appointment?</summary>
+        <p>
+          Yes. Log into your student profile to check your appointment status
+          and reschedule or cancel if needed.
+        </p>
+      </details>
+
+      <details>
+        <summary>What are the clinic operating hours?</summary>
+        <p>
+          ⏰ Monday - Friday: 8:30 am - 5pm <br />
+          ⏰ Saturdays: 8am - 2pm <br />
+          ❌ Closed on public holidays.
+        </p>
+      </details>
+
+      <details>
+        <summary>How will I know if my booking is confirmed?</summary>
+        <p>
+          Once you confirm your booking, a success message will appear with your
+          appointment details. You can also view it anytime in your student
+          profile.
+        </p>
+      </details>
+    </div>
+
+    <footer>@2025 CampusMate Health Services</footer>
+  </body>
+</html>
+

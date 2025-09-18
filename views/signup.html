@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CPUT Campus Mate - Sign Up</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Open+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Open Sans", sans-serif;
+        background-color: #f8faff;
+        background-image: 
+          radial-gradient(circle at 25% 25%, rgba(59, 119, 204, 0.08) 0%, transparent 50%),
+          radial-gradient(circle at 75% 75%, rgba(253, 180, 75, 0.08) 0%, transparent 50%);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 5%;
+        background-color: #ffffff;
+        border-bottom: 2px solid #e0e0e0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      }
+
+      .main-heading {
+        font-size: 20px;
+        margin: 0;
+        text-align: center;
+        line-height: 1;
+      }
+
+      .main-heading .campus {
+        display: block;
+        color: #3b77cc;
+        font-family: "Bangers", cursive;
+        font-size: 40px;
+        margin: 0;
+      }
+
+      .main-heading .mate {
+        display: block;
+        color: #f9b13c;
+        font-family: "Anton", sans-serif;
+        font-size: 30px;
+        margin: 0;
+        position: relative;
+      }
+
+      .top-links {
+        display: flex;
+        gap: 25px;
+      }
+
+      .top-links a {
+        text-decoration: none;
+        color: #222831;
+        font-weight: 600;
+        font-size: 16px;
+        transition: color 0.3s ease;
+        position: relative;
+        padding: 5px 0;
+      }
+
+      .top-links a:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #3b77cc;
+        transition: width 0.3s ease;
+      }
+
+      .top-links a:hover:after {
+        width: 100%;
+      }
+
+      .page-title {
+        font-family: "Bangers", cursive;
+        font-size: 2.5rem;
+        color: #0d3b66;
+        text-align: center;
+        margin: 40px 0 20px;
+        animation: fadeInUp 0.6s ease forwards;
+        opacity: 0;
+      }
+
+      .container {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(59, 119, 204, 0.1);
+        border: 1px solid rgba(59, 119, 204, 0.1);
+        width: 90%;
+        max-width: 500px;
+        margin: 20px auto;
+        animation: fadeInUp 0.6s ease 0.2s forwards;
+        opacity: 0;
+        position: relative;
+        z-index: 1;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      input {
+        width: 100%;
+        padding: 14px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 1em;
+        transition: all 0.3s ease;
+      }
+
+      input:focus {
+        border-color: #3b77cc;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(59, 119, 204, 0.2);
+      }
+
+      button {
+        width: 100%;
+        padding: 14px;
+        background-color: #fdb44b;
+        color: #222831;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease, box-shadow 0.3s ease;
+        font-size: 1em;
+        margin-top: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      }
+
+      button:hover {
+        background-color: #3b77cc;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      }
+
+      .error {
+        color: #ff6b6b;
+        text-align: center;
+        font-size: 0.9em;
+        margin-top: 15px;
+        font-weight: 600;
+      }
+
+      .success {
+        color: #28a745;
+        text-align: center;
+        font-size: 0.9em;
+        margin-top: 15px;
+        font-weight: 600;
+      }
+
+      .password-requirements {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 15px 0;
+        font-size: 0.9em;
+        border-left: 4px solid #fdb44b;
+      }
+
+      .password-requirements ul {
+        margin: 5px 0 0 20px;
+        padding: 0;
+      }
+
+      .login-link {
+        text-align: center;
+        margin-top: 25px;
+        font-size: 0.95em;
+      }
+
+      .login-link a {
+        color: #3b77cc;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .login-link a:hover {
+        text-decoration: underline;
+      }
+
+      .emergency-banner {
+        background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+        color: white;
+        text-align: center;
+        padding: 15px;
+        margin: 40px auto 0;
+        max-width: 800px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        position: relative;
+        z-index: 1;
+      }
+
+      .emergency-banner a {
+        color: white;
+        font-weight: 600;
+        text-decoration: underline;
+      }
+
+      footer {
+        text-align: center;
+        padding: 30px 5% 20px;
+        background-color: #222831;
+        color: #f1f1f1;
+        font-size: 14px;
+        margin-top: 40px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
+      }
+
+      .social-links a {
+        color: white;
+        font-size: 18px;
+        transition: all 0.3s ease;
+      }
+
+      .social-links a:hover {
+        color: #fdb44b;
+        transform: translateY(-3px);
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header {
+          flex-direction: column;
+          gap: 15px;
+          padding: 15px;
+        }
+
+        .top-links {
+          gap: 15px;
+        }
+
+        .page-title {
+          font-size: 2rem;
+          margin: 30px 0 15px;
+        }
+
+        .container {
+          padding: 30px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div class="header">
+      <h1 class="main-heading">
+        <span class="campus">CAMPUS</span><span class="mate">MATE</span>
+      </h1>
+      <div class="top-links">
+        <a href="welcome.html">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+
+    <h1 class="page-title">Create Your Account</h1>
+
+    <!-- Signup Form -->
+    <div class="container">
+      <div class="form-group">
+        <label for="name">First Name</label>
+        <input type="text" id="name" placeholder="Enter your first name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="surname">Last Name</label>
+        <input type="text" id="surname" placeholder="Enter your last name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="+27 787654321" pattern="^\+27\s\d{9}$" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="studentNumber">Student Number</label>
+        <input type="text" id="studentNumber" placeholder="Enter your 8-digit student number" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">CPUT Email</label>
+        <input type="email" id="email" placeholder="yourname@mycput.ac.za" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Create a password" required>
+        <div class="password-requirements">
+          <p>Password must contain:</p>
+          <ul>
+            <li>At least 8 characters</li>
+            <li>One uppercase letter</li>
+            <li>One number</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+      </div>
+      
+      <button onclick="signUp()" id="signupButton">Sign Up</button>
+      <p class="error" id="errorMsg"></p>
+      <p class="success" id="successMsg"></p>
+      
+      <div class="login-link">
+        Already have an account? <a href="login.html">Log in</a>
+      </div>
+    </div>
+
+    
+    <div class="emergency-banner">
+      <p><i class="fas fa-exclamation-triangle"></i> <strong>Emergency?</strong> Call campus security at <a href="tel:+27123456789">+27 123 456 789</a></p>
+    </div>
+
+   
+    <footer>
+      <div class="footer-content">
+        <p>&copy; <span id="current-year"></span> CampusMate Health Services</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </footer>
+      <script>
+      async function signUp() {
+        const first_name = document.getElementById("name").value.trim();
+        const last_name = document.getElementById("surname").value.trim();
+        const phone_number = document.getElementById("phone").value.trim();
+        const stud_no = document.getElementById("studentNumber").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+
+        const errorMsg = document.getElementById("errorMsg");
+        const successMsg = document.getElementById("successMsg");
+
+        errorMsg.textContent = "";
+        successMsg.textContent = "";
+
+        // 🛑 validation
+        if (!first_name || !last_name || !phone_number || !stud_no || !email || !password || !confirmPassword) {
+          errorMsg.textContent = "All fields are required.";
+          return;
+        }
+
+        if (!email.endsWith("@mycput.ac.za")) {
+          errorMsg.textContent = "Use your @mycput.ac.za email only.";
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          errorMsg.textContent = "Passwords do not match.";
+          return;
+        }
+
+        try {
+          // ⚡ Change URL if your backend runs somewhere else (Render/Ngrok/etc.)
+          const res = await fetch("http://localhost:3001/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              first_name,
+              last_name,
+              phone_number,
+              stud_no,
+              email,
+              password,
+            }),
+          });
+
+          const data = await res.json();
+
+          if (!res.ok) {
+            throw new Error(data.message || "Failed to register");
+          }
+
+          successMsg.textContent = data.message || "Registration successful!";
+          // redirect to student dashboard after 2s
+          setTimeout(() => {
+            window.location.href = "student.html";
+          }, 2000);
+        } catch (err) {
+          errorMsg.textContent = err.message;
+        }
+      }
+    </script>
+
+
+  </body>
+</html>

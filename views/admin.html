@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CampusMate Admin Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      padding: 30px;
+    }
+    .form-container {
+      background: white;
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #aaa;
+    }
+    button {
+      background: #007BFF;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Admin Login</h2>
+    <form id="adminLoginForm">
+      <label for="adminEmail">Email</label>
+      <input type="email" id="adminEmail" placeholder="admin@campusmate.com" required />
+      <label for="adminPassword">Password</label>
+      <input type="password" id="adminPassword" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+    <p id="errorMsg" style="color:red;"></p>
+  </div>
+
+  <script>
+    document.getElementById("adminLoginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById("adminEmail").value.trim();
+      const password = document.getElementById("adminPassword").value;
+      const errorMsg = document.getElementById("errorMsg");
+
+      errorMsg.textContent = "";
+
+      if (!email || !password) {
+        errorMsg.textContent = "Fill in both fields!";
+        return;
+      }
+
+      try {
+        const res = await fetch("http://localhost:3000/admin/login", {  // backend route for admin login
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          alert("✅ Admin logged in!");
+          window.location.href = "admin-dashboard.html"; // your admin dashboard
+        } else {
+          errorMsg.textContent = data.message || "Login failed";
+        }
+      } catch (err) {
+        errorMsg.textContent = "Server error. Try again later.";
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>

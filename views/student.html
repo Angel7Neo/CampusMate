@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CampusMate</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(
+          -225deg,
+          #5d9fff 0%,
+          #b8dcff 48%,
+          #6bbbff 100%
+        );
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background-color: #ffffff;
+      }
+
+      .main-heading {
+        font-size: 20px;
+        margin: 0;
+        text-align: center;
+        line-height: 1;
+      }
+
+      .main-heading .campus {
+        display: block;
+        color: #3b77cc;
+        font-family: "Bangers", cursive;
+        font-size: 40px;
+      }
+
+      .main-heading .mate {
+        display: block;
+        color: #f9b13c;
+        font-family: "Anton", sans-serif;
+        font-size: 30px;
+        position: relative;
+      }
+
+      .main-heading .mate::after {
+        content: "";
+        display: block;
+        width: 100px;
+        height: 8px;
+        background-color: #1d1d1d;
+        margin: 0 auto;
+      }
+
+      .top-links {
+        display: flex;
+        gap: 20px;
+      }
+
+      .top-links a {
+        text-decoration: none;
+        color: #222831;
+        font-weight: lighter;
+      }
+
+      .top-links a:hover {
+        color: #fdb44b;
+      }
+
+      .form-container {
+        width: 480px;
+        margin: 0 auto;
+        margin-top: 50px;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-container form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-container label {
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .form-container input {
+        padding: 14px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .form-container button {
+        padding: 14px;
+        background-color: #fdb44b;
+        color: #222831;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        width: 100%;
+        transition: all 250ms ease-in-out;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #007bff;
+        color: #ffffff;
+      }
+
+      button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+
+      .form-heading {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #222831;
+      }
+
+      .forgot-password {
+        margin-top: 10px;
+        text-align: center;
+        font-size: 14px;
+        color: #007bff;
+        cursor: pointer;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 15px;
+        background-color: white;
+        color: black;
+        font-size: 14px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+
+      @media (max-width: 600px) {
+        .header {
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
+        }
+        .top-links {
+          flex-direction: column;
+          align-items: center;
+        }
+        .form-container {
+          width: 90%;
+          padding: 20px;
+        }
+      }
+
+      .student-login-link {
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      .student-login-link a {
+        color: hsl(17, 100%, 55%);
+        font-weight: lighter;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+
+      .student-login-link a:hover {
+        color: #007bff;
+        text-decoration: underline;
+      }
+
+      .otp-container {
+        display: none;
+        width: 480px;
+        margin: 0 auto;
+        margin-top: 50px;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .otp-inputs {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      .otp-inputs input {
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        font-size: 18px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .resend-otp {
+        margin-top: 15px;
+        font-size: 14px;
+        color: #007bff;
+        cursor: pointer;
+      }
+
+      .resend-otp:hover {
+        text-decoration: underline;
+      }
+
+      .message {
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        text-align: center;
+      }
+
+      .message.success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .message.error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      .loading {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 2px solid #f3f3f3;
+        border-top: 2px solid #007bff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <h1 class="main-heading">
+        <span class="campus">CAMPUS</span><span class="mate">MATE</span>
+      </h1>
+      <div class="top-links">
+        <a href="welcome.html">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+
+    <div class="form-container" id="loginFormContainer">
+      <h2 class="form-heading">Welcome Back</h2>
+      <div id="messageContainer"></div>
+      <form id="loginForm">
+        <label for="email">Student Email</label>
+        <input
+          type="email"
+          id="email"
+          required
+          placeholder="example@mycput.ac.za"
+        />
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          required
+          placeholder="Enter password"
+        />
+
+        <button type="submit" id="loginBtn">Login</button>
+        <div class="forgot-password" id="forgotPasswordBtn">Forgot password?</div>
+      </form>
+    </div>
+
+    <div class="otp-container" id="otpContainer">
+      <h2 class="form-heading">OTP Verification</h2>
+      <p>Enter the 6-digit code sent to your phone</p>
+      <p id="phoneDisplay" style="font-weight: bold; color: #007bff;"></p>
+      <div class="otp-inputs">
+        <input type="text" maxlength="1" class="otp-digit" data-index="1" />
+        <input type="text" maxlength="1" class="otp-digit" data-index="2" />
+        <input type="text" maxlength="1" class="otp-digit" data-index="3" />
+        <input type="text" maxlength="1" class="otp-digit" data-index="4" />
+        <input type="text" maxlength="1" class="otp-digit" data-index="5" />
+        <input type="text" maxlength="1" class="otp-digit" data-index="6" />
+      </div>
+      <button id="verifyOtpBtn">Verify OTP</button>
+      <div class="resend-otp" id="resendOtp">Resend OTP</div>
+    </div>
+
+    <div class="student-login-link">
+      <a href="signup.html">Don't have an account? Sign up</a>
+    </div>
+
+    <footer>@2025 CampusMate Health Services</footer>
+
+    <script>
+      const API_BASE = 'http://localhost:3001';
+      let currentEmail = '';
+
+      // DOM elements
+      const loginForm = document.getElementById('loginForm');
+      const loginBtn = document.getElementById('loginBtn');
+      const messageContainer = document.getElementById('messageContainer');
+      const loginFormContainer = document.getElementById('loginFormContainer');
+      const otpContainer = document.getElementById('otpContainer');
+      const phoneDisplay = document.getElementById('phoneDisplay');
+      const verifyOtpBtn = document.getElementById('verifyOtpBtn');
+      const resendOtpBtn = document.getElementById('resendOtp');
+      const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
+      const otpInputs = document.querySelectorAll('.otp-digit');
+
+      // Utility functions
+      function showMessage(message, type = 'error') {
+        messageContainer.innerHTML = `<div class="message ${type}">${message}</div>`;
+        setTimeout(() => {
+          messageContainer.innerHTML = '';
+        }, 5000);
+      }
+
+      function setButtonLoading(button, isLoading, originalText) {
+        if (isLoading) {
+          button.innerHTML = `<span class="loading"></span> Loading...`;
+          button.disabled = true;
+        } else {
+          button.innerHTML = originalText;
+          button.disabled = false;
+        }
+      }
+
+      // OTP input handling
+      otpInputs.forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+          // Only allow numbers
+          e.target.value = e.target.value.replace(/\D/g, '');
+          
+          if (e.target.value.length === 1 && index < otpInputs.length - 1) {
+            otpInputs[index + 1].focus();
+          }
+          
+          // Auto-submit when all digits are filled
+          const otp = Array.from(otpInputs).map(input => input.value).join('');
+          if (otp.length === 6) {
+            verifyOtpBtn.click();
+          }
+        });
+        
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
+            otpInputs[index - 1].focus();
+          }
+        });
+
+        input.addEventListener('keypress', (e) => {
+          if (!/[0-9]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter'].includes(e.key)) {
+            e.preventDefault();
+          }
+        });
+      });
+
+      // Login form submission
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        if (!email.endsWith('@mycput.ac.za')) {
+          showMessage('Only CPUT student emails are allowed!');
+          return;
+        }
+
+        if (!password) {
+          showMessage('Password is required!');
+          return;
+        }
+
+        setButtonLoading(loginBtn, true, 'Login');
+
+        try {
+          // Step 1: Authenticate credentials
+          const loginRes = await fetch(`${API_BASE}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+          });
+
+          const loginData = await loginRes.json();
+          
+          if (!loginRes.ok) {
+            throw new Error(loginData.message);
+          }
+
+          showMessage('Credentials verified! Sending OTP...', 'success');
+          currentEmail = email;
+
+          // Step 2: Send OTP
+          const otpRes = await fetch(`${API_BASE}/send-otp`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email }),
+          });
+
+          const otpData = await otpRes.json();
+          
+          if (!otpRes.ok) {
+            throw new Error(otpData.message);
+          }
+
+          // Show OTP verification
+          phoneDisplay.textContent = `Sent to: ${otpData.phone}`;
+          loginFormContainer.style.display = 'none';
+          otpContainer.style.display = 'block';
+          otpInputs[0].focus();
+
+        } catch (error) {
+          showMessage(error.message);
+        } finally {
+          setButtonLoading(loginBtn, false, 'Login');
+        }
+      });
+
+      // Verify OTP
+      verifyOtpBtn.addEventListener('click', async () => {
+        const otp = Array.from(otpInputs).map(input => input.value).join('');
+        
+        if (otp.length !== 6) {
+          showMessage('Please enter a complete 6-digit OTP');
+          return;
+        }
+
+        setButtonLoading(verifyOtpBtn, true, 'Verify OTP');
+
+        try {
+          const verifyRes = await fetch(`${API_BASE}/verify-otp`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: currentEmail, otp }),
+          });
+
+          const verifyData = await verifyRes.json();
+          
+          if (!verifyRes.ok) {
+            throw new Error(verifyData.message);
+          }
+
+          showMessage('Login successful! Redirecting...', 'success');
+          
+          setTimeout(() => {
+            window.location.href = 'bookingPage.html';
+          }, 1000);
+
+        } catch (error) {
+          showMessage(error.message);
+        } finally {
+          setButtonLoading(verifyOtpBtn, false, 'Verify OTP');
+        }
+      });
+
+      // Resend OTP
+      resendOtpBtn.addEventListener('click', async () => {
+        setButtonLoading(resendOtpBtn, true, 'Resend OTP');
+
+        try {
+          const otpRes = await fetch(`${API_BASE}/send-otp`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: currentEmail }),
+          });
+
+          const otpData = await otpRes.json();
+          
+          if (!otpRes.ok) {
+            throw new Error(otpData.message);
+          }
+
+          showMessage('New OTP sent!', 'success');
+          
+          // Clear OTP inputs
+          otpInputs.forEach(input => {
+            input.value = '';
+          });
+          otpInputs[0].focus();
+
+        } catch (error) {
+          showMessage(error.message);
+        } finally {
+          setButtonLoading(resendOtpBtn, false, 'Resend OTP');
+        }
+      });
+
+      // Forgot password - redirect to login page with forgot password functionality
+      forgotPasswordBtn.addEventListener('click', () => {
+        window.location.href = 'login.html';
+      });
+    </script>
+  </body>
+</html>

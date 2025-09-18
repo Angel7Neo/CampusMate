@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campus Mate Booking Page</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: linear-gradient(
+          -225deg,
+          #5d9fff 0%,
+          #b8dcff 48%,
+          #6bbbff 100%
+        );
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .container {
+        margin: 15px auto 0 auto;
+        max-width: 800px;
+        width: 90%;
+        background: #fff;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+      }
+
+      select,
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #fdb44b;
+        color: white;
+        border: none;
+        margin-top: 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #007bff;
+      }
+
+      .confirmation {
+        background-color: #e6ffe6;
+        padding: 20px;
+        border: 1px solid #00cc66;
+        border-radius: 5px;
+        margin-top: 20px;
+        display: none;
+      }
+      .main-heading {
+        font-size: 20px;
+        margin: 0;
+        text-align: center;
+        line-height: 1;
+      }
+
+      .main-heading .campus {
+        display: block;
+        color: #3b77cc;
+        font-family: "Bangers", cursive;
+        font-size: 40px;
+        margin: 0;
+        padding: 0;
+      }
+      .main-heading .mate::after {
+        content: "";
+        display: block;
+        width: 100px;
+        height: 8px;
+        background-color: #1d1d1d;
+        margin: 0 auto;
+      }
+
+      .top-links {
+        display: flex;
+        gap: 20px;
+      }
+
+      .top-links a {
+        text-decoration: none;
+        color: #222831;
+        font-weight: lighter;
+      }
+
+      .top-links a:hover {
+        color: #fdb44b;
+      }
+
+      .page-title {
+        font-family: "Bangers", cursive;
+        font-size: 32px;
+        color: #3b77cc;
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 10px;
+      }
+      .main-heading .mate {
+        display: block;
+        color: #f9b13c;
+        font-family: "Anton", sans-serif;
+        font-size: 30px;
+        line-height: 1;
+        margin: 0;
+        padding: 0;
+        position: relative;
+      }
+      footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 15px;
+        background-color: white;
+        color: black;
+        font-size: 14px;
+        bottom: 0;
+        width: 100%;
+      }
+
+      .header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        background-color: #ffffff;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        overflow-x: hidden;
+      }
+    </style>
+    
+  </head>
+  <body>
+    <div class="header">
+      <h1 class="main-heading">
+        <span class="campus">CAMPUS</span><span class="mate">MATE</span>
+      </h1>
+      <div class="top-links">
+        <a href="welcome.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contactUs.html">Contact</a>
+      </div>
+    </div>
+    <div class="container">
+      <h2>Book Your Appointment</h2>
+
+      <label for="service">Select Service:</label>
+      <select id="service" required>
+        <option value="">-- Choose a service --</option>
+        <option value="General medical consultations plus the issue of basic medication">General medical consultations plus the issue of basic medication</option>
+        <option value=" Attending to minor ailments: eg. colds, sore throats, diarrhea"> Attending to minor ailments: eg. colds, sore throats, diarrhea</option>
+        <option value=" Reproductive health methods (prevention) including the morning after pill">Reproductive health methods (prevention) including the morning after pill</option>
+        <option value=" HIV counseling and testing"> HIV counseling and testing</option>
+        <option value=" Nutritional and counseling support for HIV positive students">  Nutritional and counseling support for HIV positive students</option>
+        <option value=" Treatment of sexually transmitted infections "> Treatment of sexually transmitted infections</option>
+        <option value=" TB-DOTS supervision "> TB-DOTS supervision</option>
+        <option value=" Wound dressings and assistance with minor injuries"> Wound dressings and assistance with minor injuries</option>
+      </select>
+      
+       
+      <label for="date">Select Date:</label>
+      <input type="date" id="date" required />
+
+      <label for="time">Select Time:</label>
+      <input type="time" id="time" required />
+
+      <label for="mode">Appointment:</label>
+      <select id="mode">
+        <option value="In-Person">In-Person</option>
+      </select>
+
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" placeholder="Enter your name" required />
+
+      <label for="studentNumber">Student Number:</label>
+      <input
+        type="text"
+        id="studentNumber"
+        placeholder="e.g. 218123456"
+        required
+      />
+
+      <button onclick="confirmBooking()">Confirm Booking</button>
+
+      <div class="confirmation" id="confirmationBox">
+        <h3>✅ Booking Confirmed!</h3>
+        <p id="confirmationText"></p>
+        <!-- View Profile Button-->
+         <button onclick=" goToProfile()"> View Profile</button>
+      </div>
+    </div>
+
+    <script>
+      function confirmBooking() {
+        const service = document.getElementById("service").value;
+        const date = document.getElementById("date").value;
+        const time = document.getElementById("time").value;
+        const mode = document.getElementById("mode").value;
+        const name = document.getElementById("name").value;
+        const studentNumber = document.getElementById("studentNumber").value;
+
+        if (!service || !date || !time || !name || !studentNumber) {
+          alert("Please fill in all required fields.");
+          return;
+        }
+
+        const summary = `
+        <strong>Service:</strong> ${service}<br>
+        <strong>Date:</strong> ${date}<br>
+        <strong>Time:</strong> ${time}<br>
+        <strong>Mode:</strong> ${mode}<br>
+        <strong>Name:</strong> ${name}<br>
+        <strong>Student Number:</strong> ${studentNumber}<br>
+      `;
+
+        document.getElementById("confirmationText").innerHTML = summary;
+        document.getElementById("confirmationBox").style.display = "block";
+      }
+
+      function goToProfile() {
+        window.location.href = "studentProfile.html";
+      }
+    </script>
+
+   <footer>@2025 CampusMate Health Services</footer>
+
+    <script>
+      // Set current year in footer
+      document.getElementById("current-year").textContent =
+        new Date().getFullYear();
+    </script>
+  </body>
+</html>

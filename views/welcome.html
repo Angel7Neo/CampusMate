@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome - CampusMate</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Open+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Open Sans", sans-serif;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 5%;
+        background-color: #ffffff;
+        border-bottom: 2px solid #e0e0e0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      }
+
+      .main-heading {
+        font-size: 20px;
+        margin: 0;
+        text-align: center;
+        line-height: 1;
+      }
+
+      .main-heading .campus {
+        display: block;
+        color: #3b77cc;
+        font-family: "Bangers", cursive;
+        font-size: 40px;
+        margin: 0;
+      }
+
+      .main-heading .mate {
+        display: block;
+        color: #f9b13c;
+        font-family: "Anton", sans-serif;
+        font-size: 30px;
+        margin: 0;
+        position: relative;
+      }
+
+      .top-links {
+        display: flex;
+        gap: 25px;
+      }
+
+      .top-links a {
+        text-decoration: none;
+        color: #222831;
+        font-weight: 600;
+        font-size: 16px;
+        transition: color 0.3s ease;
+        position: relative;
+        padding: 5px 0;
+      }
+
+      .top-links a:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #3b77cc;
+        transition: width 0.3s ease;
+      }
+
+      .top-links a:hover:after {
+        width: 100%;
+      }
+
+      /* HERO SECTION WITH LARGER BACKGROUND */
+      .hero {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        color: white;
+        min-height: 80vh; /* Larger background area */
+        background: url("campus.jpg") no-repeat center center/cover;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 0;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+        font-weight: bold;
+        color: #ffffff;
+        margin-bottom: 20px;
+        animation: fadeInUp 1s ease forwards;
+        opacity: 0;
+        z-index: 1;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7),
+          0 0 10px rgba(59, 119, 204, 0.8);
+      }
+
+      .hero p {
+        font-size: 18px;
+        color: #f1f1f1;
+        max-width: 500px;
+        margin-bottom: 30px;
+        animation: fadeInUp 1s ease 0.4s forwards;
+        opacity: 0;
+        z-index: 1;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 20px;
+        animation: fadeInUp 1s ease 0.8s forwards;
+        opacity: 0;
+        z-index: 1;
+      }
+
+      .button-group a,
+      .button-group button {
+        padding: 14px 28px;
+        background-color: #fdb44b;
+        color: #222831;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 8px;
+        transition: all 0.3s ease, box-shadow 0.3s ease;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .button-group a:hover,
+      .button-group button:hover {
+        background-color: #3b77cc;
+        color: white;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5),
+          0 0 10px rgba(59, 119, 204, 0.6);
+        transform: translateY(-2px);
+      }
+
+      /* Services Section */
+      .services {
+        padding: 80px 5%;
+        background: #f8faff;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 50px;
+      }
+
+      .section-header h2 {
+        font-size: 32px;
+        color: #0d3b66;
+        margin-bottom: 15px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-header h2:after {
+        content: "";
+        position: absolute;
+        width: 50%;
+        height: 3px;
+        background: #fdb44b;
+        bottom: -10px;
+        left: 25%;
+      }
+
+      .section-header p {
+        color: #555;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .service-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .service-card {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid rgba(59, 119, 204, 0.1);
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(59, 119, 204, 0.1);
+      }
+
+      .service-icon {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: #3b77cc;
+      }
+
+      .service-card h3 {
+        color: #0d3b66;
+        margin-bottom: 20px;
+        font-size: 22px;
+      }
+
+      .service-features {
+        list-style: none;
+      }
+
+      .service-features li {
+        padding: 10px 0;
+        border-bottom: 1px solid #f0f4ff;
+        display: flex;
+        align-items: flex-start;
+      }
+
+      .service-features li:last-child {
+        border-bottom: none;
+      }
+
+      .feature-icon {
+        color: #fdb44b;
+        margin-right: 10px;
+        margin-top: 3px;
+        flex-shrink: 0;
+      }
+
+      .emergency-banner {
+        background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+        color: white;
+        text-align: center;
+        padding: 15px;
+        margin: 50px auto 0;
+        max-width: 800px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+      }
+
+      .emergency-banner a {
+        color: white;
+        font-weight: 600;
+        text-decoration: underline;
+      }
+
+      /* Popup Styles */
+      .popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+      }
+
+      .popup-content {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        width: 90%;
+        max-width: 400px;
+      }
+
+      .popup-content h3 {
+        margin-bottom: 20px;
+        font-size: 22px;
+        color: #3b77cc;
+      }
+
+      .popup-content button {
+        margin: 10px;
+        padding: 12px 24px;
+        font-size: 16px;
+        background-color: #fdb44b;
+        color: #222831;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.3s ease;
+        width: 150px;
+      }
+
+      .popup-content button:hover {
+        background-color: #3b77cc;
+        color: white;
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 30px 5% 20px;
+        background-color: #222831;
+        color: #f1f1f1;
+        font-size: 14px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto 30px;
+        text-align: left;
+      }
+
+      .footer-column h3 {
+        color: #fdb44b;
+        margin-bottom: 20px;
+        font-size: 18px;
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 10px;
+      }
+
+      .footer-links a {
+        color: #ddd;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: #fdb44b;
+      }
+
+      .footer-links i {
+        margin-right: 8px;
+        width: 20px;
+        text-align: center;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        color: white;
+        font-size: 18px;
+        transition: all 0.3s ease;
+      }
+
+      .social-links a:hover {
+        color: #fdb44b;
+        transform: translateY(-3px);
+      }
+
+      .copyright {
+        padding-top: 20px;
+        border-top: 1px solid #444;
+        color: #aaa;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .top-links {
+          gap: 15px;
+        }
+
+        .hero {
+          min-height: 70vh; 
+        }
+
+        .hero h1 {
+          font-size: 36px;
+        }
+
+        .hero p {
+          font-size: 16px;
+        }
+
+        .button-group {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .button-group a, 
+        .button-group button {
+          width: 100%;
+          text-align: center;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .footer-links {
+          margin-bottom: 20px;
+        }
+
+        .social-links {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <div class="header">
+      <h1 class="main-heading">
+        <span class="campus">CAMPUS</span><span class="mate">MATE</span>
+      </h1>
+      <div class="top-links">
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contactUs.html">Contact</a>
+      </div>
+    </div>
+
+    
+    <div class="hero">
+      <h1>Welcome to CampusMate</h1>
+      <p>
+        Your trusted platform for campus health appointments and student support.
+      </p>
+      <div class="button-group">
+        <button onclick="showLoginPopup()">Login</button>
+        <a href="signup.html">Sign Up</a>
+      </div>
+    </div>
+
+   
+    <section class="services" id="services">
+      <div class="section-header">
+        <h2>Student Health Services</h2>
+        <p>Comprehensive medical care for registered students at our campus clinic</p>
+      </div>
+
+      <div class="service-cards">
+        <div class="service-card">
+          <div class="service-icon">🩺</div>
+          <h3>Primary Healthcare</h3>
+          <ul class="service-features">
+            <li><i class="fas fa-check-circle feature-icon"></i> General medical consultations</li>
+            <li><i class="fas fa-check-circle feature-icon"></i> Basic medication dispensing</li>
+            <li><i class="fas fa-check-circle feature-icon"></i> Treatment for minor ailments</li>
+            <li><i class="fas fa-check-circle feature-icon"></i> Wound care & minor injuries</li>
+          </ul>
+        </div>
+
+        
+        <div class="service-card">
+          <div class="service-icon">❤️</div>
+          <h3>Reproductive Health</h3>
+          <ul class="service-features">
+            <li><i class="fas fa-check-circle feature-icon"></i> STI testing & treatment</li>
+            <li><i class="fas fa-check-circle feature-icon"></i> Contraception counseling</li>
+            <li><i class="fas fa-check-circle feature-icon"></i> Emergency contraception</li>
+            <li><i class="fas fa-check-circle feature-icon"></i> Confidential HIV testing</li>
+          </ul>
+        </div>
+
+        
+        <div class="service-card">
+          <div class="service-icon">🛡️</div>
+          <h3>Specialized Programs</h3>
+          <ul class="service-features">
+            <li><i class="fas fa-check-circle feature-icon"></i> TB-DOTS supervision</li>
+            <li><i class="fas fa-check-circle feature-icon"></i> HIV nutritional support</li>
+            <li><i class="fas fa-check-circle feature-icon"></i> Health education workshops</li>
+            <li><i class="fas fa-check-circle feature-icon"></i> Preventive care counseling</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="emergency-banner">
+        <p><i class="fas fa-exclamation-triangle"></i> <strong>Emergency?</strong> Call campus security at <a href="tel:+27123456789">+27 123 456 789</a> </p>
+      </div>
+    </section>
+
+   
+    <div class="popup" id="loginPopup">
+      <div class="popup-content">
+        <h3>Login as:</h3>
+        <button onclick="goToLogin('student')">Student</button>
+        <button onclick="goToLogin('staff')">Staff</button>
+      </div>
+    </div>
+
+    
+    <footer>
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#">Appointments</a></li>
+            <li><a href="#">FAQs</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Health Resources</h3>
+          <ul class="footer-links">
+            <li><a href="#">Mental Health</a></li>
+            <li><a href="#">Sexual Health</a></li>
+            <li><a href="#">Nutrition Advice</a></li>
+            <li><a href="#">Wellness Tips</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul class="footer-links">
+            <li><i class="fas fa-map-marker-alt"></i> Campus Health Center, Building A</li>
+            <li><i class="fas fa-phone"></i> (012) 345-6789</li>
+            <li><i class="fas fa-envelope"></i> health@campus.edu</li>
+            <li><i class="fas fa-clock"></i> Mon-Fri: 8AM-5PM</li>
+          </ul>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        &copy; <span id="current-year"></span> CampusMate Health Services. All rights reserved.
+      </div>
+    </footer>
+
+    <script>
+      function showLoginPopup() {
+        document.getElementById("loginPopup").style.display = "flex";
+      }
+
+      function goToLogin(role) {
+        if (role === "student") {
+          window.location.href = "student.html";
+        } else {
+          window.location.href = "admin.html";
+        }
+      }
+
+      window.addEventListener("click", function (e) {
+        const popup = document.getElementById("loginPopup");
+        if (e.target === popup) {
+          popup.style.display = "none";
+        }
+      });
+
+     
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
+

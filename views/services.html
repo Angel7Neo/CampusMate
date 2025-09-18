@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CampusMate Services</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        overflow-x: hidden;
+        background: linear-gradient(
+          -225deg,
+          #5d9fff 0%,
+          #b8dcff 48%,
+          #6bbbff 100%
+        );
+      }
+      a {
+        text-decoration: none;
+        color: #222831;
+      }
+      a:hover {
+        color: #fdb44b;
+      }
+
+      /* HEADER */
+      .header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        background: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+      .main-heading {
+        margin: 0;
+        line-height: 1;
+        text-align: center;
+      }
+      .campus {
+        display: block;
+        color: #3b77cc;
+        font-family: "Bangers", cursive;
+        font-size: 40px;
+      }
+      .mate {
+        display: block;
+        color: #f9b13c;
+        font-family: "Anton", sans-serif;
+        font-size: 30px;
+      }
+      .mate::after {
+        content: "";
+        display: block;
+        width: 100px;
+        height: 6px;
+        background: #1d1d1d;
+        margin: 4px auto 0;
+        border-radius: 3px;
+      }
+
+      .top-links a {
+        margin-left: 15px;
+        font-weight: bold;
+      }
+
+      /* HERO SECTION */
+      .hero {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: url("https://images.unsplash.com/photo-1505751172876-fa1923c5c528")
+          center/cover no-repeat;
+        position: relative;
+        height: 400px;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.55);
+        top: 0;
+        left: 0;
+      }
+      .hero-text {
+        max-width: 700px;
+        padding: 30px;
+        font-size: 20px;
+        color: #fff;
+        position: relative;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: 0.7s;
+      }
+      .hero-text h1 {
+        font-size: 42px;
+        margin-bottom: 15px;
+        color: #fdb44b;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+      .hero-text p {
+        font-size: 18px;
+        line-height: 1.6;
+      }
+      .hero-text.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* SERVICES SECTION */
+      .services-section {
+        max-width: 1100px;
+        margin: 60px auto;
+        padding: 0 20px;
+      }
+      .services-section h1 {
+        text-align: center;
+        color: #3b77cc;
+        font-size: 36px;
+        margin-bottom: 40px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        position: relative;
+      }
+      .services-section h1::after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: #fdb44b;
+        margin: 10px auto 0;
+        border-radius: 2px;
+      }
+      .services-content {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      .services-list {
+        flex: 1;
+      }
+      .services-list ul {
+        list-style: none;
+      }
+      .services-list li {
+        margin: 15px 0;
+        font-size: 18px;
+        color: #444;
+        opacity: 0;
+        transform: translateX(-30px);
+        transition: all 0.5s ease-in-out;
+        cursor: pointer;
+        background: #fff;
+        padding: 10px 15px;
+        border-radius: 8px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+      }
+      .services-list li::before {
+        content: "✔ ";
+        color: #f9b13c;
+        font-weight: bold;
+      }
+      .services-list li:hover {
+        color: #1e90ff;
+        transform: translateX(10px);
+        background: #f0f8ff;
+      }
+
+      /* Slider Styles */
+      .services-slider {
+        flex: 1;
+        position: relative;
+        width: 100%;
+        height: 370px;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+      .services-slider img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 1s ease-in-out, transform 0.7s ease;
+      }
+      .services-slider img.active {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #fff;
+        padding: 8px 12px;
+        background: rgba(0, 0, 0, 0.5);
+        font-size: 28px;
+        border-radius: 5px;
+        transition: background 0.1s;
+        z-index: 10;
+      }
+      .arrow:hover {
+        background: rgba(0, 0, 0, 0.8);
+      }
+      .arrow.left {
+        left: 10px;
+      }
+      .arrow.right {
+        right: 10px;
+      }
+
+      /* BOTTOM INFO */
+      .bottom-info {
+        width: 100%;
+        padding: 35px 20px;
+        text-align: center;
+        color: #fff;
+        background: url("https://images.unsplash.com/photo-1581093572967-5a820f236d4f")
+          center/cover no-repeat;
+        position: relative;
+      }
+      .bottom-info::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .bottom-info div,
+      .bottom-info button {
+        position: relative;
+        z-index: 1;
+      }
+      .bottom-info button {
+        margin-top: 20px;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        background: #fdb44b;
+        color: #fff;
+        font-size: 16px;
+        transition: 0.3s;
+      }
+      .bottom-info button:hover {
+        background: #007bff;
+      }
+
+      /* FOOTER */
+      footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 15px;
+        background: #fff;
+        color: #000;
+        font-size: 14px;
+        width: 100%;
+        box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.08);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <div class="header">
+      <h1 class="main-heading">
+        <span class="campus">CAMPUS</span><span class="mate">MATE</span>
+      </h1>
+      <div class="top-links">
+        <a href="welcome.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contactUs.html">Contact</a>
+        <a href="FAQs.html" > FAQS</a>
+      </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <div class="hero">
+      <div class="hero-text">
+        <h1>Your Health, Our Priority</h1>
+        <p>
+          At CampusMate Health Services, we provide students with professional,
+          accessible, and confidential healthcare. From consultations to
+          counseling, we’ve got you covered.
+        </p>
+      </div>
+    </div>
+
+    <!-- SERVICES SECTION -->
+    <div class="services-section">
+      <h1>Services We Offer</h1>
+      <div class="services-content">
+        <!-- Left: Services List -->
+        <div class="services-list">
+          <ul>
+            <li>General medical consultations + basic medication</li>
+            <li>Minor ailments (colds, sore throats, diarrhea)</li>
+            <li>Reproductive health (morning after pill included)</li>
+            <li>HIV counselling & testing (VCT)</li>
+            <li>Nutritional & counselling support for HIV positive students</li>
+            <li>Treatment of sexually transmitted infections</li>
+            <li>TB-DOTS supervision</li>
+            <li>Wound dressings & minor injuries</li>
+            <li>Health education programmes</li>
+          </ul>
+        </div>
+
+        <!-- Right: Slider Images -->
+        <div class="services-slider">
+          <span class="arrow left" onclick="previousSlide()">&lt;</span>
+          <span class="arrow right" onclick="nextSlide()">&gt;</span>
+          <img
+            src="https://directdoc.co.za/wp-content/uploads/2025/02/p4-slider-02.webp"
+            class="active"
+          />
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwucI9m052_dZh7YnS26sSgRH9NRfOmEqTyA&s"
+          />
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/56d765a3746fb902cc9658da/1456972684977-Z35HIUY1M975X245MI19/image-asset.jpeg"
+          />
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKuUysrbvovdcxidm4Neiitjcgb8b6QeEdrQ&s"
+          />
+          
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="bottom-info">
+      <div>
+        <strong>Contact:</strong> admin@campusmate.ac.za<br />
+        <strong>Location:</strong> Library Building, First Floor, D6 Campus
+      </div>
+      <button onclick="location.href='contactUs.html'">Contact Us</button>
+    </div>
+
+   
+    <footer>@2025 CampusMate Health Services</footer>
+
+    <script>
+     
+      const heroText = document.querySelector(".hero-text");
+      window.addEventListener("scroll", () => {
+        if (heroText.getBoundingClientRect().top < window.innerHeight * 0.85) {
+          heroText.classList.add("active");
+        }
+      });
+      window.addEventListener("load", () => {
+        heroText.classList.add("active");
+      });
+
+      // Services slider
+      const slides = document.querySelectorAll(".services-slider img");
+      let index = 0;
+      function showSlide(i) {
+        slides.forEach((img) => img.classList.remove("active"));
+        slides[i].classList.add("active");
+      }
+      function nextSlide() {
+        index = (index + 1) % slides.length;
+        showSlide(index);
+      }
+      function previousSlide() {
+        index = (index - 1 + slides.length) % slides.length;
+        showSlide(index);
+      }
+
+      // Auto-slide every 3 seconds
+      setInterval(nextSlide, 3000);
+
+      // Animate services list items on scroll
+      const listItems = document.querySelectorAll(".services-list li");
+      function revealListItems() {
+        const trigger = window.innerHeight * 0.85;
+        listItems.forEach((li, i) => {
+          if (li.getBoundingClientRect().top < trigger) {
+            setTimeout(() => (li.style.opacity = 1), i * 150);
+            li.style.transform = "translateX(0)";
+          }
+        });
+      }
+      window.addEventListener("scroll", revealListItems);
+      window.addEventListener("load", revealListItems);
+    </script>
+  </body>
+</html>

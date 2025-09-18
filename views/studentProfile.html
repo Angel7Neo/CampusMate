@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CPUT Campus Mate - Student Profile</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Open+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Open Sans", sans-serif;
+        background-color: #f8faff;
+        background-image: radial-gradient(
+            circle at 25% 25%,
+            rgba(59, 119, 204, 0.08) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 75% 75%,
+            rgba(253, 180, 75, 0.08) 0%,
+            transparent 50%
+          );
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        color: #333;
+        margin: 0; /* remove default body margin */
+      }
+
+      .header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0; /* removed 5% left padding */
+        background-color: #ffffff;
+        border-bottom: 2px solid #e0e0e0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      /* Logo styling - same as booking page */
+      .main-heading {
+        font-size: 20px;
+        margin: 0;
+        text-align: left;
+        line-height: 1;
+        padding-left: 15px; /* optional small padding so it's not glued to absolute edge */
+      }
+
+      .main-heading .campus {
+        display: block;
+        color: #3b77cc;
+        font-family: "Bangers", cursive;
+        font-size: 40px;
+        margin: 0;
+        padding: 0;
+      }
+
+      .main-heading .mate {
+        display: block;
+        color: #f9b13c;
+        font-family: "Anton", sans-serif;
+        font-size: 30px;
+        line-height: 1;
+        margin: 0;
+        padding: 0;
+        position: relative;
+      }
+
+      .main-heading .mate::after {
+        content: "";
+        display: block;
+        width: 100px;
+        height: 8px;
+        background-color: #1d1d1d;
+        margin: 0;
+      }
+
+      .top-links {
+        display: flex;
+        gap: 25px;
+        margin-right: 15px; /* optional right margin */
+      }
+
+      .top-links a {
+        text-decoration: none;
+        color: #222831;
+        font-weight: 600;
+        font-size: 16px;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+
+      .top-links a:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #3b77cc;
+        transition: width 0.3s ease;
+      }
+
+      .top-links a:hover:after {
+        width: 100%;
+      }
+
+      .page-title {
+        font-family: "Bangers", cursive;
+        font-size: 2.5rem;
+        color: #0d3b66;
+        text-align: center;
+        margin: 40px 0 20px;
+      }
+
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(59, 119, 204, 0.1);
+        border: 1px solid rgba(59, 119, 204, 0.1);
+        width: 90%;
+        max-width: 700px;
+        margin: 20px auto;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #3b77cc;
+        border-bottom: 2px solid #fdb44b;
+        padding-bottom: 5px;
+      }
+
+      .info-item {
+        margin-bottom: 12px;
+        font-size: 1rem;
+      }
+
+      .info-item strong {
+        color: #222831;
+      }
+
+      .actions {
+        margin-top: 25px;
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .actions button {
+        padding: 12px 20px;
+        background-color: #fdb44b;
+        color: #222831;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .actions button:hover {
+        background-color: #3b77cc;
+        color: #fff;
+        transform: translateY(-2px);
+      }
+
+      footer {
+        text-align: center;
+        padding: 30px 5% 20px;
+        background-color: #222831;
+        color: #f1f1f1;
+        font-size: 14px;
+        margin-top: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="header">
+      <h1 class="main-heading">
+        <span class="campus">CAMPUS</span><span class="mate">MATE</span>
+      </h1>
+      <div class="top-links">
+        <a href="welcome.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contactUs.html">Contact</a>
+      </div>
+    </div>
+
+    <h1 class="page-title">Student Profile</h1>
+
+    <div class="container">
+      <!-- Student Info -->
+      <h2><i class="fas fa-user"></i> Student Information</h2>
+      <div class="info-item"><strong>Name:</strong> John Doe</div>
+      <div class="info-item"><strong>Student Number:</strong> 22012345</div>
+      <div class="info-item"><strong>Email:</strong> johndoe@mycput.ac.za</div>
+
+      <!-- Upcoming Appointment -->
+      <h2><i class="fas fa-calendar-check"></i> Upcoming Appointment</h2>
+      <div class="info-item" id="apptDate">
+        <strong>Date:</strong> 18 September 2025
+      </div>
+      <div class="info-item" id="apptTime"><strong>Time:</strong> 10:30 AM</div>
+      <div class="info-item" id="apptType">
+        <strong>Type:</strong> General Checkup
+      </div>
+      <div class="info-item" id="apptStatus">
+        <strong>Status:</strong> Confirmed
+      </div>
+
+      <!-- Appointment History -->
+      <h2><i class="fas fa-history"></i> Appointment History</h2>
+      <div class="info-item">05 Aug 2025 - Consultation - Completed</div>
+      <div class="info-item">12 Apr 2025 - General Checkup - Completed</div>
+
+      <!-- Actions -->
+      <div class="actions">
+        <button onclick="editProfile()">Edit Profile</button>
+        <button onclick="reschedule()">Reschedule</button>
+        <button onclick="cancelAppointment()">Cancel Appointment</button>
+        <button onclick="logout()">Log Out</button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; <span id="current-year"></span> CampusMate Health Services</p>
+    </footer>
+
+    <script>
+      // Auto update year
+      document.getElementById("current-year").textContent =
+        new Date().getFullYear();
+
+      // Edit Profile - alert for now
+      function editProfile() {
+        alert("Edit Profile feature coming soon!");
+      }
+
+      // Reschedule - redirect to booking page
+      function reschedule() {
+        window.location.href = "bookingPage.html"; 
+      }
+
+      // Cancel Appointment - confirmation and clear appointment info
+      function cancelAppointment() {
+        const confirmCancel = confirm(
+          "Are you sure you want to cancel your appointment?"
+        );
+        if (confirmCancel) {
+          alert("Your appointment has been cancelled.");
+          document.getElementById("apptDate").textContent = "";
+          document.getElementById("apptTime").textContent = "";
+          document.getElementById("apptType").textContent = "";
+          document.getElementById("apptStatus").textContent = "";
+        }
+      }
+
+      // Logout - redirect to login page
+      function logout() {
+        window.location.href = "student.html"; 
+      }
+    </script>
+  </body>
+</html>

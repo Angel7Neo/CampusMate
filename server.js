@@ -10,27 +10,39 @@ const twilio = require('twilio');
 const app = express();
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:3001',  'https://campusmate-production-017f.up.railway.app', 'null'],
-  credentials: true
+  origin: '*',  // Allow all origins for testing
+  credentials: false
 }));
 
 app.use(bodyParser.json());
 app.use(express.json());
 
-// ---------------- DATABASE ----------------
-const db = mysql.createConnection({
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root', 
-  password: process.env.DB_PASS || 'N@nSep05',
-  database: process.env.DB_NAME || 'campusmate'
+// ---------------- DATABASE (MySQL Connection Pool) ----------------
+const db = mysql.createPool({
+  host: process.env.MYSQL_HOST || process.env.DB_HOST || 'localhost',
+  user: process.env.MYSQL_USER || process.env.DB_USER || 'root',
+  password: process.env.MYSQL_PASSWORD || process.env.DB_PASS || '',
+  database: process.env.MYSQL_DATABASE || process.env.DB_NAME || 'campusmate',
+  port: process.env.MYSQL_PORT || process.env.DB_PORT || 3306,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+  acquireTimeout: 60000,
+  timeout: 60000,
+  reconnect: true
 });
 
-db.connect(err => {
+console.log('MySQL Connection Pool created for Railway');
+
+// Test database connection
+db.getConnection((err, connection) => {
   if (err) {
     console.error("Database connection failed:", err);
     return;
   }
-  console.log('MySQL Connected!');
+  console.log('MySQL Connected to Railway!');
+  if (connection) connection.release();
 });
 
 // ---------------- TWILIO SETUP ----------------
@@ -132,7 +144,6 @@ app.post('/login', (req, res) => {
   const { email, password } = req.body;
   
   console.log('Login attempt for:', email);
-  console.log('Password provided:', password); // Remove this after debugging
   
   if (!email || !password) {
     return res.status(400).json({ message: "All fields are required" });
@@ -152,11 +163,9 @@ app.post('/login', (req, res) => {
 
     const student = results[0];
     console.log('Found user:', student.email);
-    console.log('Stored hash:', student.password); // Remove this after debugging
 
     try {
       const match = await bcrypt.compare(password, student.password);
-      console.log('Password match:', match); // Remove this after debugging
       
       if (!match) {
         return res.status(401).json({ message: "Incorrect password" });
@@ -365,7 +374,7 @@ app.post('/booking', async (req, res) => {
       (err, result) => {
         if (err) {
           console.error('Database error:', err);
-          return res.status(500).json({ message: 'Database error' });
+          return res.status(500).json({ message: 'Database error', error: err.message });
         }
 
         res.json({
@@ -517,7 +526,7 @@ app.listen(PORT, HOST, () => {
   console.log(`📡 Network access: http://${HOST}:${PORT}`);
   
   // Database connection status
-  console.log(`🗄️  Database: ${process.env.DB_NAME || 'campusmate'} on ${process.env.DB_HOST || 'localhost'}`);
+  console.log(`🗄️  Database: ${process.env.MYSQL_DATABASE || process.env.DB_NAME || 'campusmate'} on ${process.env.MYSQL_HOST || process.env.DB_HOST || 'localhost'}`);
   
   // Check Twilio configuration on startup
   if (!process.env.TWILIO_SID || !process.env.TWILIO_AUTH_TOKEN || !process.env.TWILIO_PHONE) {

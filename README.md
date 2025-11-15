@@ -131,7 +131,7 @@ CampusMate/
 
 | Name | Role | GitHub |
 |------|------|--------|
-| Angel Masonganye | Frontend Developer |Backend Developer| [@Angel7Neo](https://github.com/Angel7Neo) |
+| Angel Masonganye | Frontend Developer Backend Developer| [@Angel7Neo](https://github.com/Angel7Neo) |
 | Nompumelelo Mbatha | Backend Developer | [@Nompumelelo82](https://github.com/Nompumelelo82) |
 | Tebogo Makgato | Frontend Developer | [@tebogomakgato](https://github.com/tebogomakgato) |
 | Nonhlanhla Mahlangu | Backend Developer | [@nonhlahlahazel@22](https://github.com/nonhlahlahazel@22) |
